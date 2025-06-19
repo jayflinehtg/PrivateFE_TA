@@ -261,13 +261,13 @@ fun TransactionHistoryItem(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Tx Hash:",
+                        text = "Private Tx Hash:",
                         fontSize = 12.sp,
                         color = Color.Gray,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = record.publicTxHash,
+                        text = record.privateTxHash,
                         fontSize = 14.sp,
                         color = Color.Black,
                         fontWeight = FontWeight.Medium
@@ -275,7 +275,7 @@ fun TransactionHistoryItem(
                 }
 
                 IconButton(
-                    onClick = { onCopyTxHash(record.publicTxHash) },
+                    onClick = { onCopyTxHash(record.privateTxHash) },
                     modifier = Modifier.size(32.dp)
                 ) {
                     Icon(

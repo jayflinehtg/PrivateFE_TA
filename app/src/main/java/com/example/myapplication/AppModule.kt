@@ -40,7 +40,7 @@ internal object AppModule {
         val infuraApiKey: String? = null
 
         val readonlyRPCMap = mapOf(
-            "Public" to RetrofitClient.PUBLIC_RPC_URL
+            "Public" to RetrofitClient.PRIVATE_RPC_URL
         )
 
         // Membuat SDKOptions

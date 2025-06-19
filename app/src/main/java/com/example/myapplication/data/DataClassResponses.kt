@@ -165,7 +165,7 @@ class DataClassResponses {
     // Data class untuk Plant Record
     data class PlantRecord(
         @SerializedName("recordId") val recordId: String,
-        @SerializedName("publicTxHash") val publicTxHash: String,
+        @SerializedName("privateTxHash") val privateTxHash: String,
         @SerializedName("plantId") val plantId: String,
         @SerializedName("userAddress") val userAddress: String,
         @SerializedName("timestamp") val timestamp: String
@@ -174,7 +174,7 @@ class DataClassResponses {
     // Data class untuk Transaction History Item
     data class TransactionHistoryItem(
         @SerializedName("recordId") val recordId: String,
-        @SerializedName("publicTxHash") val publicTxHash: String,
+        @SerializedName("privateTxHash") val privateTxHash: String,
         @SerializedName("plantId") val plantId: String,
         @SerializedName("userAddress") val userAddress: String,
         @SerializedName("timestamp") val timestamp: String,
