@@ -183,6 +183,12 @@ class DataClassResponses {
         @SerializedName("formattedTimestamp") val formattedTimestamp: String
     )
 
+    // Data class untuk update transaction hash untuk history
+    data class UpdatePlantRecordHashRequest(
+        val recordId: Int,
+        val txHash: String
+    )
+
     // Data class untuk Pagination
     data class Pagination(
         @SerializedName("currentPage") val currentPage: Int,
