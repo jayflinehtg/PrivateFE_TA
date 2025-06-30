@@ -2,14 +2,9 @@ package com.example.myapplication.services
 
 import com.example.myapplication.data.DataClassResponses
 import com.example.myapplication.data.DataClassResponses.AverageRatingResponse
-import com.example.myapplication.data.DataClassResponses.CheckWalletRequest
-import com.example.myapplication.data.DataClassResponses.CheckWalletResponse
 import com.example.myapplication.data.DataClassResponses.LoginApiResponse
 import com.example.myapplication.data.DataClassResponses.PrepareRegistrationRequest
-import com.example.myapplication.data.DataClassResponses.RatePlantRequest
-import com.example.myapplication.data.DataClassResponses.RatePlantResponse
 import com.example.myapplication.data.DataClassResponses.ServerLogoutResponse
-import com.example.myapplication.data.DataClassResponses.SimpleResponse
 import com.example.myapplication.data.DataClassResponses.UpdatePlantRecordHashRequest
 import com.example.myapplication.data.DataClassResponses.UserInfoResponse
 import com.example.myapplication.data.IPFSResponse
@@ -17,7 +12,6 @@ import com.example.myapplication.data.LoginRequest
 import com.example.myapplication.data.PaginatedPlantResponse
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
@@ -44,32 +38,32 @@ interface ApiService {
 
     /* ================================ Tanaman ================================ */
     @POST("plants/add")
-    suspend fun prepareAddPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareAddPlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.AddPlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @PUT("plants/edit/{plantId}")
-    suspend fun prepareEditPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareEditPlant(
         @Header("Authorization") token: String,
         @Path("plantId") plantId: String,
         @Body request: DataClassResponses.EditPlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/like")
-    suspend fun prepareLikePlant( // Nama diubah untuk kejelasan
+    suspend fun prepareLikePlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.LikeRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/rate")
-    suspend fun prepareRatePlant( // Nama diubah untuk kejelasan
+    suspend fun prepareRatePlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.RatePlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/comment")
-    suspend fun prepareCommentPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareCommentPlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.CommentRequest
     ): DataClassResponses.PrepareTransactionApiResponse
@@ -99,13 +93,8 @@ interface ApiService {
         @Path("plantId") plantId: String
     ): AverageRatingResponse
 
-    @GET("plants/{plantId}/ratings")
-    suspend fun getPlantRatings(
-        @Path("plantId") plantId: String
-    ): DataClassResponses.PlantRatingsResponse
-
     @GET("plants/{plantId}/comments")
-    suspend fun getPaginatedComments( // Nama diubah untuk kejelasan
+    suspend fun getPaginatedComments(
         @Path("plantId") plantId: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int = 10

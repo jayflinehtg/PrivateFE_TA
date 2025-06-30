@@ -14,16 +14,6 @@ class DataClassResponses {
         @SerializedName("data") val data: TransactionData?
     )
 
-    data class CheckWalletRequest(
-        val walletAddress: String
-    )
-
-    data class CheckWalletResponse(
-        val success: Boolean,
-        val message: String? = null,
-        val data: CheckWalletData? = null
-    )
-
     data class CheckWalletData(
         val isRegistered: Boolean,
         val walletAddress: String
@@ -36,8 +26,8 @@ class DataClassResponses {
 
     )
 
-    // Data class untuk respons login dari middleware (setelah verifikasi password)
-    data class LoginApiResponse( // Ganti nama dari LoginResponse lama agar lebih jelas
+    // Data class untuk respons login dari middleware
+    data class LoginApiResponse(
         @SerializedName("success") val success: Boolean,
         @SerializedName("token") val token: String?,
         @SerializedName("userData") val userData: UserData?,
@@ -151,14 +141,6 @@ class DataClassResponses {
     data class CommentRequest(
         @SerializedName("plantId") val plantId: String,
         @SerializedName("comment") val comment: String
-    )
-
-    // Response umum untuk like dan komentar
-    data class SimpleResponse(
-        @SerializedName("success") val success: Boolean,
-        @SerializedName("message") val message: String,
-        @SerializedName("txHash") val txHash: String,
-        @SerializedName("plantId") val plantId: String
     )
 
     /* ============================ RECORD TANAMAN =========================== */

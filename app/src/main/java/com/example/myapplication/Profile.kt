@@ -133,7 +133,7 @@ fun Profile(navController: NavController, viewModel: MainViewModel = hiltViewMod
             is LogoutResult.Loading -> {
                 Log.d("ProfileScreen", "Logout loading state active")
                 launch {
-                    delay(5000) // 10 seconds timeout
+                    delay(5000)
                     if (logoutState is LogoutResult.Loading) {
                         Log.w("ProfileScreen", "Logout loading timeout - forcing navigation")
                         viewModel.resetLogoutState()
@@ -189,7 +189,7 @@ fun Profile(navController: NavController, viewModel: MainViewModel = hiltViewMod
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
             color = when {
-                uiState.isGuest -> Color(0xFF2196F3) // Blue untuk tamu
+                uiState.isGuest -> Color(0xFF2196F3)
                 isLoggedIn -> colorResource(id = R.color.dark_green)
                 displayWalletAddress.isNotEmpty() -> Color(0xFFFF9800) // Orange untuk terhubung tapi belum login
                 else -> Color.Red
@@ -223,7 +223,7 @@ fun Profile(navController: NavController, viewModel: MainViewModel = hiltViewMod
                         }
                         displayWalletAddress.isNotEmpty() -> {
                             Log.d("ProfileScreen", "User terhubung tapi belum login, hanya disconnect wallet...")
-                            viewModel.logoutAndDisconnect() // Tetap gunakan fungsi yang sama untuk konsistensi
+                            viewModel.logoutAndDisconnect()
                         }
                         else -> {
                             Log.w("ProfileScreen", "Kondisi tidak valid untuk logout")

@@ -11,7 +11,7 @@ object PreferencesHelper {
     private const val KEY_IS_USER_REGISTERED = "isUserRegistered"
     private const val KEY_WALLET_ADDRESS = "walletAddress"
     private const val KEY_JWT_TOKEN = "jwtToken"
-    private const val KEY_USER_FULL_NAME = "userFullName" // Tambahkan key untuk fullName
+    private const val KEY_USER_FULL_NAME = "userFullName"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -53,22 +53,18 @@ object PreferencesHelper {
         getPrefs(context).edit { remove(KEY_JWT_TOKEN) }
     }
 
-    // Fungsi untuk menyimpan fullName
     fun saveUserFullName(context: Context, fullName: String) {
         getPrefs(context).edit { putString(KEY_USER_FULL_NAME, fullName) }
     }
 
-    // Fungsi untuk mengambil fullName
     fun getUserFullName(context: Context): String? {
         return getPrefs(context).getString(KEY_USER_FULL_NAME, null)
     }
 
-    // Fungsi untuk menghapus fullName (opsional)
     fun clearUserFullName(context: Context) {
         getPrefs(context).edit { remove(KEY_USER_FULL_NAME) }
     }
 
-    // Fungsi untuk menghapus wallet address
     fun clearWalletAddress(context: Context) {
         getPrefs(context).edit { remove(KEY_WALLET_ADDRESS) }
     }

@@ -261,7 +261,7 @@ fun TransactionHistoryItem(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Private Tx Hash:",
+                        text = "Tx Hash:",
                         fontSize = 12.sp,
                         color = Color.Gray,
                         fontWeight = FontWeight.Medium
