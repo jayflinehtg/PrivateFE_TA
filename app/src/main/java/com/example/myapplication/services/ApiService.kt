@@ -44,32 +44,32 @@ interface ApiService {
 
     /* ================================ Tanaman ================================ */
     @POST("plants/add")
-    suspend fun prepareAddPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareAddPlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.AddPlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @PUT("plants/edit/{plantId}")
-    suspend fun prepareEditPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareEditPlant(
         @Header("Authorization") token: String,
         @Path("plantId") plantId: String,
         @Body request: DataClassResponses.EditPlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/like")
-    suspend fun prepareLikePlant( // Nama diubah untuk kejelasan
+    suspend fun prepareLikePlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.LikeRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/rate")
-    suspend fun prepareRatePlant( // Nama diubah untuk kejelasan
+    suspend fun prepareRatePlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.RatePlantRequest
     ): DataClassResponses.PrepareTransactionApiResponse
 
     @POST("plants/comment")
-    suspend fun prepareCommentPlant( // Nama diubah untuk kejelasan
+    suspend fun prepareCommentPlant(
         @Header("Authorization") token: String,
         @Body request: DataClassResponses.CommentRequest
     ): DataClassResponses.PrepareTransactionApiResponse
@@ -105,7 +105,7 @@ interface ApiService {
     ): DataClassResponses.PlantRatingsResponse
 
     @GET("plants/{plantId}/comments")
-    suspend fun getPaginatedComments( // Nama diubah untuk kejelasan
+    suspend fun getPaginatedComments(
         @Path("plantId") plantId: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int = 10

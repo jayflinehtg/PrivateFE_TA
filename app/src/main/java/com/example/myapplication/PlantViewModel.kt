@@ -96,7 +96,7 @@ class PlantViewModel @Inject constructor(
 
     // Fungi untuk Transaksi On-Chain
     private suspend fun sendPlantTransaction(transactionDataHex: String, actionNameForLog: String)
-    : Result {
+            : Result {
         val userWalletAddress = try {
             ethereum.selectedAddress.takeIf { !it.isNullOrEmpty() }
                 ?: PreferencesHelper.getWalletAddress(context)
@@ -220,11 +220,10 @@ class PlantViewModel @Inject constructor(
                 when(val specificResult = transactionResult) {
                     is Result.Success.Item -> {
                         val txHash = specificResult.value
-
                         try {
                             // Get current record count untuk determine recordId
                             val recordCountResponse = apiService.getRecordCount()
-                            val currentRecordId = (recordCountResponse.recordCount.toInt() - 1) // Record yang baru dibuat
+                            val currentRecordId = (recordCountResponse.recordCount.toInt() - 1)
 
                             // Update plant record dengan txHash yang sebenarnya
                             updatePlantRecordWithTxHash(currentRecordId, txHash)
@@ -232,9 +231,7 @@ class PlantViewModel @Inject constructor(
                             Log.d("PlantViewModel_Add", "Plant record updated with txHash: $txHash")
                         } catch (e: Exception) {
                             Log.w("PlantViewModel_Add", "Failed to update plant record: ${e.message}")
-                            // Don't fail main operation if record update fails
                         }
-
                         if(txHash.isNotEmpty()) txHash else throw Exception("Add plant on-chain sukses tapi txHash tidak valid: $txHash")
                     }
                     is Result.Error -> {
@@ -398,23 +395,24 @@ class PlantViewModel @Inject constructor(
                 when(val specificResult = transactionResult) {
                     is Result.Success.Item -> {
                         val txHash = specificResult.value
-
                         try {
+                            // Get current record count untuk determine recordId
                             val recordCountResponse = apiService.getRecordCount()
-                            val currentRecordId = (recordCountResponse.recordCount.toInt() - 1)
+                            val currentRecordId = (recordCountResponse.recordCount.toInt() - 1) // Record yang baru dibuat
 
+                            // Update plant record dengan txHash yang baru
                             updatePlantRecordWithTxHash(currentRecordId, txHash)
 
                             Log.d("PlantViewModel_Edit", "Plant record updated with txHash: $txHash")
                         } catch (e: Exception) {
                             Log.w("PlantViewModel_Edit", "Failed to update plant record: ${e.message}")
                         }
-
                         if(txHash.isNotEmpty()) txHash else throw Exception("Edit plant on-chain sukses tapi txHash tidak valid: $txHash")
                     }
                     is Result.Error -> {
                         val error = specificResult.error
 
+                        // Handle user cancellation berdasarkan search results
                         if (error.code == 4001 || error.message.contains("user rejected", ignoreCase = true)) {
                             throw Exception("User membatalkan transaksi edit plant")
                         } else {
@@ -453,7 +451,7 @@ class PlantViewModel @Inject constructor(
         }
     }
 
-    // Function untuk update plant record dengan txHash
+    // Fungsi Update Transaction Hash
     private suspend fun updatePlantRecordWithTxHash(recordId: Int, txHash: String) {
         try {
             val currentToken = PreferencesHelper.getJwtToken(context)
@@ -466,6 +464,7 @@ class PlantViewModel @Inject constructor(
                 val transactionDataHex = response.data?.transactionData
                     ?: throw ViewModelValidationException("Update transaction data tidak tersedia")
 
+                // Execute update transaction hash
                 val updateResult = sendPlantTransaction(transactionDataHex, "UpdatePlantRecord")
 
                 when (updateResult) {
@@ -637,10 +636,7 @@ class PlantViewModel @Inject constructor(
                     throw ViewModelValidationException(prepareResponse.message ?: "Gagal mempersiapkan data like.")
                 }
 
-                val transactionDataHex = prepareResponse.data?.transactionData
-                    ?: throw ViewModelValidationException("Transaction data tidak tersedia")
-
-                val transactionResult = sendPlantTransaction(transactionDataHex, "LikePlant")
+                val transactionResult = sendPlantTransaction(prepareResponse.data.transactionData, "LikePlant")
 
                 when(val specificResult = transactionResult) {
                     is Result.Success.Item -> {
