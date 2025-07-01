@@ -291,7 +291,7 @@ fun EditPlantScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    // TOMBOL SIMPAN PERUBAHAN
+                    // --- TOMBOL SIMPAN PERUBAHAN ---
                     Button(
                         onClick = {
                             var hasError = false
@@ -421,7 +421,7 @@ fun FormField(
                 )
             }
         )
-        if (displayErrorText != null) {
+        if (displayErrorText != null) { // Tampilkan error jika ada
             Text(
                 text = displayErrorText,
                 color = Color.Red,

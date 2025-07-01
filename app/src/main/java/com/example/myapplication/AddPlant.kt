@@ -158,7 +158,7 @@ fun AddPlant(
             elevation = CardDefaults.cardElevation(6.dp)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
-                // Form fields
+                // Form fields dengan teks hitam
                 FormField("Nama Tanaman", namaTanaman, showError && namaTanaman.isBlank()) { namaTanaman = it }
                 FormField("Nama Latin", namaLatin, showError && namaLatin.isBlank()) { namaLatin = it }
                 FormField("Komposisi", komposisi, showError && komposisi.isBlank()) { komposisi = it }
@@ -335,7 +335,7 @@ fun FormField(
             text = label,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
-            color = Color.Black
+            color = Color.Black // Warna label hitam
         )
         OutlinedTextField(
             value = value,

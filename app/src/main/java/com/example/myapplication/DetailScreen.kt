@@ -70,6 +70,7 @@
 
         val plantUiState by viewModel.uiState
 
+        // Mendestrukturisasi state untuk kemudahan akses
         val plant = plantUiState.selectedPlant
         val avgRating = plantUiState.selectedRating
         val comments = plantUiState.plantComments
@@ -108,7 +109,7 @@
                         if (commentPlantState is CommentPlantResult.Loading) {
                             Log.d("DetailScreen", "Comment loading detected on resume - applying timeout")
                             viewModel.viewModelScope.launch {
-                                delay(2500)
+                                delay(2500) // Reduced timeout untuk faster response
                                 if (viewModel.uiState.value.commentPlantState is CommentPlantResult.Loading) {
                                     Log.w("DetailScreen", "Comment timeout - resetting state and refreshing")
                                     viewModel.resetCommentPlantState()
@@ -163,7 +164,7 @@
                 is LikePlantResult.Success -> {
                     Toast.makeText(context, "Aksi like/unlike berhasil", Toast.LENGTH_SHORT).show()
                     viewModel.resetLikePlantState()
-                    delay(2500)
+                    delay(2500) // Menununggu 3 detik
                     viewModel.refreshPlantDetail(plantId, null)
                 }
                 is LikePlantResult.Error -> {

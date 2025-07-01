@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 // Handle UI events dari ViewModel (navigasi & pesan)
-                LaunchedEffect(navController, viewModel) {
+                LaunchedEffect(navController, viewModel) { // Key bisa disederhanakan
                     viewModel.uiEvent.collect { event ->
                         Log.d("MainActivity", "Menerima UiEvent: $event")
                         when (event) {
@@ -127,7 +127,7 @@ class MainActivity : ComponentActivity() {
                     composable(Screen.Register.route) {
                         RegisterScreen(
                             navController = navController,
-                            viewModel = viewModel,
+                            viewModel = viewModel, // Teruskan MainViewModel
                             onNavigateToLogin = {
                                 navController.navigate(Screen.Login.route) {
                                     popUpTo(Screen.Register.route) { inclusive = true }
@@ -142,13 +142,14 @@ class MainActivity : ComponentActivity() {
                         composable(Screen.Login.route) {
                             LoginScreen(
                                 navController = navController,
-                                viewModel = viewModel,
+                                viewModel = viewModel, // Teruskan MainViewModel
                                 onNavigateToRegister = {
                                     navController.navigate(Screen.Register.route) {
                                         popUpTo(Screen.Login.route) { inclusive = true }
                                         launchSingleTop = true
                                     }
                                 }
+                                // Callback onLoginSuccess dihapus
                             )
                         }
 
@@ -157,7 +158,7 @@ class MainActivity : ComponentActivity() {
                             BottomNavBarScreen(
                                 rootNavController = navController,
                                 isGuest = uiState.isGuest,
-                                viewModel = viewModel
+                                viewModel = viewModel // MainViewModel diteruskan ke BottomNavBarScreen
                             )
                         }
 

@@ -280,7 +280,7 @@ class PlantViewModel @Inject constructor(
     suspend fun performUploadImage(imageUri: Uri): String {
         return withContext(Dispatchers.IO) {
 
-            // Update IPFS state ke Loading
+            // TAMBAHAN: Update IPFS state ke Loading
             _uiState.value = _uiState.value.copy(ipfsUploadState = IPFSUploadResult.Loading)
 
             var tempFile: File? = null
